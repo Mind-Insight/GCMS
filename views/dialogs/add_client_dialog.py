@@ -12,6 +12,8 @@ class AddClientDialog(QMainWindow):
         self.ui.setupUi(self)
         self.fill_comboBox()
         if client_data:
+            self.ui.label.setText("Изменить клиента")
+            self.ui.addClientButton.setText("Изменить")
             self.fill_fields(client_data)
 
     def fill_fields(self, client_data):

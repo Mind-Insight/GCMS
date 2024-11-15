@@ -5,7 +5,6 @@ class ClientModel:
     def __init__(self, db_name="gym.db"):
         self.connection = sqlite3.connect(db_name)
         self.cursor = self.connection.cursor()
-        # self.create_table()
 
     def add_client(self, name, surname, membership_id, gender, email):
         query = """
