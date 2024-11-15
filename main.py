@@ -12,7 +12,7 @@ import controllers.menu_controller
 class MainApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Система управления тренажерным залом")
+        self.setWindowTitle("Система управления клиентами тренажерного зала")
         self.setGeometry(100, 100, 500, 500)
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)

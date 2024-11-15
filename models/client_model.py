@@ -24,7 +24,7 @@ class ClientModel:
             f"""
                 SELECT membership_id FROM memberships
                 JOIN membership_types
-                ON type_id = membership_id
+                ON type_id = membership_type_id
                 WHERE type = '{membership_type}'
                 AND duration = '{duration}'
             """
@@ -42,12 +42,53 @@ class ClientModel:
         ).fetchall()
         return response
 
+    def get_membership_duration_type_by_id(self, pk):
+        response = self.cursor.execute(
+            f"""
+                SELECT duration, type
+                FROM memberships
+                JOIN membership_types
+                ON type_id = membership_type_id
+                WHERE membership_id = {pk}
+            """
+        ).fetchone()
+        return response
+
+    def update_client(
+        self,
+        client_id,
+        name,
+        surname,
+        membership_id,
+        gender,
+        email,
+    ):
+        self.cursor.execute(
+            f"""
+                UPDATE clients
+                SET name = '{name}', surname = '{surname}',
+                membership_id = {membership_id}, gender = '{gender}',
+                email = '{email}'
+                WHERE client_id = {client_id}
+            """
+        )
+        self.connection.commit()
+
     def get_all_memberships(self):
         response = self.cursor.execute("SELECT * FROM memberships").fetchall()
         return response
 
     def get_all_clients(self):
         response = self.cursor.execute("SELECT * FROM clients").fetchall()
+        return response
+
+    def get_client_by_id(self, id):
+        response = self.cursor.execute(
+            f"""
+                SELECT * FROM clients
+                WHERE client_id = {id}
+            """
+        ).fetchone()
         return response
 
     def get_cursor_headers(self):
