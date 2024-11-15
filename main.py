@@ -1,9 +1,5 @@
 import sys
-from PyQt6.QtWidgets import (
-    QApplication,
-    QStackedWidget,
-    QMainWindow,
-)
+from PyQt6.QtWidgets import QApplication, QStackedWidget, QMainWindow
 
 import views.client_view
 import views.enter_view
@@ -18,24 +14,27 @@ class MainApp(QMainWindow):
         self.setGeometry(100, 100, 500, 500)
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)
+        self.client_view = views.client_view.ClientView(self)
+        self.enter_view = views.enter_view.EnterView(self)
+
         self.client_controller = (
-            controllers.client_controller.ClientController()
+            controllers.client_controller.ClientController(
+                self.client_view, self
+            )
         )
-        self.enter_controller = controllers.enter_controller.EnterController()
-        self.client_view = views.client_view.ClientView(self.client_controller)
-        self.enter_view = views.enter_view.EnterView(self.enter_controller)
+        self.enter_controller = controllers.enter_controller.EnterController(
+            self.enter_view, self
+        )
         self.stack.addWidget(self.enter_view)
         self.stack.addWidget(self.client_view)
-        self.init_navigation()
+        self.stack.setCurrentIndex(0)
 
-    def init_navigation(self):
-        self.enter_view.ui.enterButton.clicked.connect(
-            lambda: self.stack.setCurrentIndex(1)
-        )
+    def switch_view(self, index):
+        self.stack.setCurrentIndex(index)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    obj = MainApp()
-    obj.show()
+    main_app = MainApp()
+    main_app.show()
     sys.exit(app.exec())

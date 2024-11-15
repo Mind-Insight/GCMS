@@ -2,8 +2,10 @@ from models.client_model import ClientModel
 
 
 class ClientController:
-    def __init__(self):
+    def __init__(self, view, app):
         self.model = ClientModel()
+        self.view = view
+        self.app = app
 
     def add_client(self, name, phone, email):
         if not name:
