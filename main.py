@@ -19,7 +19,6 @@ class MainApp(QMainWindow):
         self.client_view = views.client_view.ClientView(self)
         self.enter_view = views.enter_view.EnterView(self)
         self.menu_view = views.menu_view.MenuView(self)
-
         self.client_controller = (
             controllers.client_controller.ClientController(
                 self.client_view, self

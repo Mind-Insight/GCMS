@@ -1,5 +1,8 @@
 from models.client_model import ClientModel
 
+from views.dialogs.add_client_dialog import AddClientDialog
+from controllers.add_client_controller import AddClientController
+
 
 class ClientController:
     def __init__(self, view, app):
@@ -8,15 +11,20 @@ class ClientController:
         self.app = app
 
         self.view.ui.backButton.clicked.connect(self.handle_back_button)
+        self.view.ui.addButton.clicked.connect(self.handle_add_client)
 
     def handle_back_button(self):
         self.app.switch_view(1)
 
-    def add_client(self, name, phone, email):
-        if not name:
-            return "Имя не может быть пустым!"
-        self.model.add_client(name, phone, email)
-        return "Клиент добавлен успешно!"
+    def handle_add_client(self):
+        self.add_form = AddClientDialog(
+            parent=self.view,
+        )
+        self.add_client_controller = AddClientController(
+            self.add_form,
+            self.model,
+        )
+        self.add_form.show()
 
     def get_all_clients(self):
         return self.model.get_all_clients()
