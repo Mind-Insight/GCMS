@@ -10,6 +10,10 @@ class EnterController:
         self.view.ui.enterButton.clicked.connect(self.handle_enter_button)
 
     def handle_enter_button(self):
+        ###
+        self.app.switch_view(1)
+        return
+        ###
         email = self.view.ui.emailEdit.text()
         password = self.view.ui.passwordEdit.text()
         is_valid, verdict = self.model.validate_fields(
