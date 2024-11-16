@@ -73,6 +73,19 @@ class ClientModel:
         )
         self.connection.commit()
 
+    def delete_clients(self, client_ids):
+        placeholder = ", ".join(["?"] * len(client_ids))
+        query = f"""
+                DELETE FROM clients
+                WHERE client_id IN ({placeholder})
+            """
+        self.cursor.execute(query, client_ids)
+        self.connection.commit()
+
+    def get_client_id_by_row(self, row):
+        clients = self.get_all_clients()
+        return clients[row][0]
+
     def get_all_memberships(self):
         response = self.cursor.execute("SELECT * FROM memberships").fetchall()
         return response

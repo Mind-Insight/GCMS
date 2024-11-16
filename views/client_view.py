@@ -15,7 +15,7 @@ class ClientView(QMainWindow):
 
     def fill_table(self):
         clients = self.model.get_all_clients()
-        self.ui.tableWidget.setColumnCount(len(clients[0]))
+        self.ui.tableWidget.setColumnCount(len(clients[0]) if clients else 0)
         headers = self.model.get_cursor_headers()
         self.ui.tableWidget.setHorizontalHeaderLabels(
             [item[0] for item in headers]
