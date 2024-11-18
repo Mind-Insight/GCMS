@@ -9,7 +9,7 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
+class Ui_AddAdmin(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(508, 485)
@@ -49,6 +49,10 @@ class Ui_Dialog(object):
         self.label_4 = QtWidgets.QLabel(parent=Dialog)
         self.label_4.setGeometry(QtCore.QRect(70, 200, 67, 22))
         self.label_4.setObjectName("label_4")
+        self.backButton = QtWidgets.QPushButton(parent=Dialog)
+        self.backButton.setGeometry(QtCore.QRect(50, 420, 50, 30))
+        self.backButton.setObjectName("backButton")
+        self.backButton.setText("Назад")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

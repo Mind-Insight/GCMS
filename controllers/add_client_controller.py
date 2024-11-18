@@ -8,7 +8,7 @@ class AddClientController:
     def handle_save_client(self):
         title = self.view.ui.comboBoxMembership.currentText().split(" - ")
         print(title)
-        membership_id = self.model.get_membership_id_by_title(title)[0]
+        membership_id = self.model.get_membership_id_by_title(title)
         name, surname, gender, email = (
             self.view.ui.nameAddEdit.text(),
             self.view.ui.surnameAddEdit.text(),

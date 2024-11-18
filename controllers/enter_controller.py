@@ -8,6 +8,7 @@ class EnterController:
         self.app = app
 
         self.view.ui.enterButton.clicked.connect(self.handle_enter_button)
+        self.view.ui.pushButton.clicked.connect(self.handle_add_admin_button)
 
     def handle_enter_button(self):
         ###
@@ -27,3 +28,6 @@ class EnterController:
             self.view.ui.errorLabel.setText("админ не найден")
         else:
             self.app.switch_view(1)
+    
+    def handle_add_admin_button(self):
+        self.app.switch_view(3)

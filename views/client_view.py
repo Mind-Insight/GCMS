@@ -5,16 +5,15 @@ from models.client_model import ClientModel
 
 
 class ClientView(QMainWindow):
-    def __init__(self, controller):
+    def __init__(self):
         super().__init__()
-        self.controller = controller
         self.model = ClientModel()
         self.ui = Ui_ClientsWindow()
         self.ui.setupUi(self)
         self.fill_table()
 
     def fill_table(self):
-        clients = self.model.get_all_clients()
+        clients = self.model.get_all_clients_except_id_field()
         self.ui.tableWidget.setColumnCount(len(clients[0]) if clients else 0)
         headers = self.model.get_cursor_headers()
         self.ui.tableWidget.setHorizontalHeaderLabels(

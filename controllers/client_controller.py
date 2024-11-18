@@ -31,11 +31,10 @@ class ClientController:
     def handle_delete_client(self):
         selected_indexes = self.view.ui.tableWidget.selectedIndexes()
         selected_rows = sorted(set(index.row() for index in selected_indexes))
-        print(selected_rows)
         confirmation = QMessageBox.question(
             self.view,
             "Подтвердить удаление",
-            "Вы уверен, что хотите удалить записи: "
+            "Вы уверены, что хотите удалить записи: "
             f"{", ".join(map(lambda x: str(x + 1), selected_rows))}",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         )
@@ -56,10 +55,3 @@ class ClientController:
             self.dialog, self.model, client_data[0] if client_data else None
         )
         self.dialog.show()
-
-    def get_all_clients(self):
-        return self.model.get_all_clients()
-
-    def delete_client(self, client_id):
-        self.model.delete_client(client_id)
-        return "Клиент удалён!"
