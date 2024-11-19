@@ -7,7 +7,7 @@ from models.client_model import ClientModel
 
 
 class AddWorkoutDialog(QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, workout_data=None):
         super().__init__(parent)
         self.model = WorkoutModel()
         self.clients_model = ClientModel()
@@ -38,5 +38,17 @@ class AddWorkoutDialog(QMainWindow):
         for i in range(self.ui.listWidget.count()):
             item = self.ui.listWidget.item(i)
             if item.checkState() == Qt.CheckState.Checked:
-                selected_clients.append(item.data(Qt.ItemDataRole.UserRole))
+                client_id = self.clients_model.get_client_by_name_surname(
+                    *(item.data(0).split())
+                )
+                selected_clients.append(client_id)
         return selected_clients
+
+    def set_selected_clients(self, client_ids):
+        for index in range(self.ui.listWidget.count()):
+            item = self.ui.listWidget.item(index)
+            client_id = self.clients_model.get_client_by_name_surname(
+                *(item.data(0).split())
+            )
+            if client_id in client_ids:
+                item.setCheckState(Qt.CheckState.Checked)

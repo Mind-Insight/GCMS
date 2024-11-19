@@ -95,6 +95,15 @@ class ClientModel:
     def get_cursor_headers(self):
         return self.cursor.description
 
+    def get_client_by_name_surname(self, name, surname):
+        query = """
+            SELECT client_id
+            FROM clients
+            WHERE name = ?
+            AND surname = ?
+        """
+        return self.cursor.execute(query, (name, surname)).fetchone()
+
     def __del__(self):
         """Закрытие соединения при уничтожении объекта."""
         self.connection.close()
