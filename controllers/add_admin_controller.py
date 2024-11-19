@@ -1,4 +1,5 @@
 import os
+import base64
 
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtGui import QPixmap
@@ -35,7 +36,7 @@ class AddAdminController:
             self.view.selected_image_path
         ):
             with open(self.view.selected_image_path, "rb") as file:
-                photo_data = file.read()
+                photo_data = base64.b64encode(file.read())
         self.model.add_admin(name, surname, email, password, photo_data)
         self.app.switch_view(0)
 
