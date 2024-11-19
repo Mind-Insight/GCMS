@@ -11,10 +11,6 @@ class EnterController:
         self.view.ui.pushButton.clicked.connect(self.handle_add_admin_button)
 
     def handle_enter_button(self):
-        ###
-        self.app.switch_view(1)
-        return
-        ###
         email = self.view.ui.emailEdit.text()
         password = self.view.ui.passwordEdit.text()
         is_valid, verdict = self.model.validate_fields(
@@ -28,6 +24,6 @@ class EnterController:
             self.view.ui.errorLabel.setText("админ не найден")
         else:
             self.app.switch_view(1)
-    
+
     def handle_add_admin_button(self):
         self.app.switch_view(3)

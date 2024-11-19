@@ -6,11 +6,19 @@ class AddAdminModel:
         self.connection = sqlite3.connect(db_name)
         self.cursor = self.connection.cursor()
 
-    def add_admin(self, name, surname, email, password):
-        self.cursor.execute(
-            f"""
-                INSERT INTO admins (name, surname, email, password)
-                VALUES ('{name}', '{surname}', '{email}', '{password}')
+    def add_admin(self, name, surname, email, password, photo_data):
+        query = """
+                INSERT INTO admins (name, surname, email, password, photo)
+                VALUES (?, ?, ?, ?, ?)
             """
+        self.cursor.execute(
+            query,
+            (
+                name,
+                surname,
+                email,
+                password,
+                photo_data,
+            ),
         )
         self.connection.commit()

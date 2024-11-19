@@ -6,7 +6,9 @@ import views.enter_view
 import views.menu_view
 import views.add_admin_view
 from views.workout_view import WorkoutView
+from views.membership_view import MembershipView
 from controllers.workout_controller import WorkoutController
+from controllers.memberships_controller import MembershipController
 import controllers.add_admin_controller
 import controllers.client_controller
 import controllers.enter_controller
@@ -25,6 +27,7 @@ class MainApp(QMainWindow):
         self.menu_view = views.menu_view.MenuView()
         self.add_admin_view = views.add_admin_view.AddAdminView()
         self.workout_view = WorkoutView()
+        self.membership_view = MembershipView()
 
         self.client_controller = (
             controllers.client_controller.ClientController(
@@ -45,12 +48,16 @@ class MainApp(QMainWindow):
             )
         )
         self.workout_controller = WorkoutController(self.workout_view, self)
+        self.membership_controller = MembershipController(
+            self.membership_view, self
+        )
 
         self.stack.addWidget(self.enter_view)
         self.stack.addWidget(self.menu_view)
         self.stack.addWidget(self.client_view)
         self.stack.addWidget(self.add_admin_view)
         self.stack.addWidget(self.workout_view)
+        self.stack.addWidget(self.membership_view)
         self.stack.setCurrentIndex(0)
 
     def switch_view(self, index):

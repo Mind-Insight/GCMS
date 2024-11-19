@@ -32,10 +32,6 @@ class Ui_MenuWindow(object):
         self.exitButton = QtWidgets.QPushButton(parent=Dialog)
         self.exitButton.setGeometry(QtCore.QRect(120, 310, 261, 30))
         self.exitButton.setObjectName("exitButton")
-        self.backButton = QtWidgets.QPushButton(parent=Dialog)
-        self.backButton.setGeometry(QtCore.QRect(50, 420, 50, 30))
-        self.backButton.setObjectName("backButton")
-        self.backButton.setText("Назад")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

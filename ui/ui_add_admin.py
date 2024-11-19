@@ -49,6 +49,13 @@ class Ui_AddAdmin(object):
         self.label_4 = QtWidgets.QLabel(parent=Dialog)
         self.label_4.setGeometry(QtCore.QRect(70, 200, 67, 22))
         self.label_4.setObjectName("label_4")
+        self.uploadImageButton = QtWidgets.QPushButton(
+            "Загрузить изображение", parent=Dialog
+        )
+        self.uploadImageButton.setGeometry(QtCore.QRect(180, 360, 180, 30))
+        self.imageLabel = QtWidgets.QLabel(parent=Dialog)
+        self.imageLabel.setGeometry(QtCore.QRect(300, 400, 100, 100))
+        self.imageLabel.setScaledContents(True)
         self.backButton = QtWidgets.QPushButton(parent=Dialog)
         self.backButton.setGeometry(QtCore.QRect(50, 420, 50, 30))
         self.backButton.setObjectName("backButton")
