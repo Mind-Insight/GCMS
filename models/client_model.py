@@ -105,5 +105,4 @@ class ClientModel:
         return self.cursor.execute(query, (name, surname)).fetchone()
 
     def __del__(self):
-        """Закрытие соединения при уничтожении объекта."""
         self.connection.close()

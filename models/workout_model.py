@@ -69,7 +69,6 @@ class WorkoutModel:
         return response[0] if response else None
 
     def add_workout(self, workout_type_id, date, time, trainer_id, client_ids):
-        # Добавляем новую тренировку в таблицу `workouts`
         query_workout = """
             INSERT INTO workouts (workout_type, trainer_id, date, time)
             VALUES (?, ?, ?, ?)
@@ -80,7 +79,6 @@ class WorkoutModel:
             )
             workout_id = self.cursor.lastrowid
 
-            # Добавляем записи в связанную таблицу `workout_clients`
             query_clients = """
                 INSERT INTO workout_clients (workout_id, client_id)
                 VALUES (?, ?)
@@ -133,5 +131,4 @@ class WorkoutModel:
         self.connection.commit()
 
     def __del__(self):
-        """Закрываем соединение при удалении объекта."""
         self.connection.close()

@@ -28,6 +28,6 @@ class MenuController:
         self.app.enter_view.ui.errorLabel.clear()
 
         self.app.switch_view(0)
-    
+
     def handle_memberships_button(self):
         self.app.switch_view(5)
