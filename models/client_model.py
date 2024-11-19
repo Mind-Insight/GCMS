@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 
 
 class ClientModel:
@@ -103,6 +104,15 @@ class ClientModel:
             AND surname = ?
         """
         return self.cursor.execute(query, (name, surname)).fetchone()
+
+    def export_clients_to_csv(self, file_path):
+        clients = self.get_all_clients_except_id_field()
+        headers = ["Name", "Surname", "Membership ID", "Gender", "Email"]
+
+        with open(file_path, mode="w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(headers)
+            writer.writerows(clients)
 
     def __del__(self):
         self.connection.close()

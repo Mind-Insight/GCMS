@@ -37,6 +37,11 @@ class Ui_ClientsWindow(object):
         self.backButton = QtWidgets.QPushButton(parent=Dialog, text="назад")
         self.backButton.setGeometry(QtCore.QRect(200, 450, 50, 25))
         self.backButton.setObjectName("backButton")
+        self.exportButton = QtWidgets.QPushButton(
+            parent=Dialog, text="экспортировать"
+        )
+        self.exportButton.setGeometry(QtCore.QRect(350, 450, 120, 25))
+        self.exportButton.setObjectName("exportButton")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

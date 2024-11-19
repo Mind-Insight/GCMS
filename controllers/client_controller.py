@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox, QFileDialog
 
 from models.client_model import ClientModel
 from views.dialogs.add_client_dialog import AddClientDialog
@@ -15,6 +15,7 @@ class ClientController:
         self.view.ui.addButton.clicked.connect(self.handle_add_client)
         self.view.ui.changeButton.clicked.connect(self.handle_edit_client)
         self.view.ui.deleteButton.clicked.connect(self.handle_delete_client)
+        self.view.ui.exportButton.clicked.connect(self.handle_export_clients)
 
     def handle_back_button(self):
         self.app.switch_view(1)
@@ -55,3 +56,21 @@ class ClientController:
             self.dialog, self.model, client_data[0] if client_data else None
         )
         self.dialog.show()
+
+    def handle_export_clients(self):
+        file_path, _ = QFileDialog.getSaveFileName(
+            self.view, "Сохранить как", "", "CSV Files (*.csv)"
+        )
+
+        if file_path:
+            try:
+                self.model.export_clients_to_csv(file_path)
+                QMessageBox.information(
+                    self.view, "Успех", "Данные экспортированы"
+                )
+            except Exception as e:
+                QMessageBox.critical(
+                    self.view,
+                    "Ошибка",
+                    f"Не удалось экспортировать данные: {e}",
+                )
